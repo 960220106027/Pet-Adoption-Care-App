@@ -43,11 +43,11 @@ class FavoriteProvider with ChangeNotifier {
       
       var response = await https.get(
         Uri.parse(
-           "http://campus.sicsglobal.co.in/Project//PetAdoption_New/api/viewfavpets.php?aid=1&petid=3",)
+           "http://campus.sicsglobal.co.in/Project/PetAdoption_New/api/viewfavpets.php?aid=1&petid=3",)
       );
 
       print(
-          "http://campus.sicsglobal.co.in/Project//PetAdoption_New/api/viewfavpets.php?aid=1&petid=3");
+          "http://campus.sicsglobal.co.in/Project/PetAdoption_New/api/viewfavpets.php?aid=1&petid=3");
 
       print(response.body);
 
@@ -109,6 +109,59 @@ class FavoriteProvider with ChangeNotifier {
       notifyListeners();
     }
   }
+
+  Future<void> addItemToFavourites(
+      {String? petid, String? userid}) async {
+    var body = {
+      'petid': petid.toString(),
+      'aid': userid.toString(),
+     
+    };
+
+    try {
+      var response = await https.post(
+          Uri.parse(
+              'http://campus.sicsglobal.co.in/Project/PetAdoption_New/api/addfavpet.php?aid=$userid&petid=$petid'),
+          body: body);
+
+      if (response.statusCode == 200) {
+        // Request successful
+        print('Added to favouite successfully');
+        print('Response: ${response.body}');
+      } else {
+        // Request failed with error code
+        print('Failed to add to cart. Status Code: ${response.statusCode}');
+      }
+    } catch (e) {
+      // Exception thrown during request
+      print('Failed favourite. Exception: $e');
+    }
+  }
+
+Future<void> deleteFav(String? favId, BuildContext context) async {
+    // final user = Provider.of<UserProvider>(context, listen: false);
+    final url = Uri.parse(
+        'http://campus.sicsglobal.co.in/Project/PetAdoption_New/api/delete_fav.php?fid=$favId');
+
+    try {
+      final response = await https.delete(url);
+      print(url);
+      if (response.statusCode == 200) {
+      getAllFavouriteData(context: context);
+        // Cart deleted successfully
+        print('Cart deleted successfully');
+      } else {
+        // Failed to delete cart
+        print('Failed to delete cart: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error deleting cart: $e');
+    }
+  }
+
+
  
-}         
+}
+ 
+       
             

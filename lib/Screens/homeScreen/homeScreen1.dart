@@ -11,11 +11,10 @@ import 'package:petadoption/Widget/PetWidget.dart';
 import 'package:petadoption/Widget/categorylistWidget.dart';
 import 'package:provider/provider.dart';
 
-
 class HomeScreen1 extends StatefulWidget {
-  static const routename='all_pets_screen';
-  static const routeename='all_categories_screen';
-  static const routesname='all_categoriesdetail_screen';
+  static const routename = 'all_pets_screen';
+  static const routeename = 'all_categories_screen';
+  static const routesname = 'all_categoriesdetail_screen';
 
   const HomeScreen1({super.key});
 
@@ -24,26 +23,25 @@ class HomeScreen1 extends StatefulWidget {
 }
 
 class _HomeScreen1State extends State<HomeScreen1> {
-   @override
+    TextEditingController filtercontroller = TextEditingController();
+  @override
   void initState() {
     Provider.of<PetProvider>(context, listen: false)
         .getAllPetData(context: context);
-  
+    Provider.of<CategoryProvider>(context,listen: false).getAllCategoryData(context: context);
+
     super.initState();
   }
-  
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final pet=Provider.of<PetProvider>(context);
-    final category=Provider.of<CategoryProvider>(context);
+    final pet = Provider.of<PetProvider>(context);
+    final category = Provider.of<CategoryProvider>(context);
     final detailcategory = Provider.of<CategoryDetailProvider>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: pink,
-        
-       
         title: Text(
           "Pets Adoption & care",
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
@@ -62,135 +60,174 @@ class _HomeScreen1State extends State<HomeScreen1> {
         child: ListView(
           children: [
             UserAccountsDrawerHeader(
-              
-                decoration: BoxDecoration(color: pink.withOpacity(0.8),),
-                accountName: Text("Anusha",style: TextStyle(color: Colors.black,fontSize: 18,fontWeight: FontWeight.bold),),
-                accountEmail: Text("anusha@gmail.com",style: TextStyle(color: Colors.black,fontSize: 18,),),
-                currentAccountPicture: CircleAvatar(radius: 60,backgroundImage: AssetImage("assets/female.png"),),
-                
+              decoration: BoxDecoration(
+                color: pink.withOpacity(0.8),
+              ),
+              accountName: Text(
+                "Anusha",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
+              ),
+              accountEmail: Text(
+                "anusha@gmail.com",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
                 ),
-                ListTile(
-               leading: IconButton(onPressed: () {
-                 
-               }, icon: Icon(Icons.pets),),
-               title: Text("My Adoptions"),
-                
               ),
-              ListTile(
-               leading: IconButton(onPressed: () {
-                 
-               }, icon: Icon(Icons.chat),),
-               title: Text("FA&Q"),
-                
+              currentAccountPicture: CircleAvatar(
+                radius: 60,
+                backgroundImage: AssetImage("assets/female.png"),
               ),
-               ListTile(
-               leading: IconButton(onPressed: () {
-                 
-               }, icon: Icon(Icons.logout,color: Colors.red,),),
-               title: Text("Logout",style: TextStyle(color: Colors.red),),
-                
+            ),
+            ListTile(
+              leading: IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.pets),
               ),
+              title: Text("My Adoptions"),
+            ),
+            ListTile(
+              leading: IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.chat),
+              ),
+              title: Text("FA&Q"),
+            ),
+            ListTile(
+              leading: IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.logout,
+                  color: Colors.red,
+                ),
+              ),
+              title: Text(
+                "Logout",
+                style: TextStyle(color: Colors.red),
+              ),
+            ),
           ],
-          
         ),
-        
-        
       ),
       backgroundColor: pinkish,
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-               TextFormField(
-           decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(90),
-                      ),
-                      prefixIcon: Icon(Icons.search),
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black),
-                          borderRadius: BorderRadius.circular(90)),
-                      hintText: "Search",
-                      prefixIconColor: Colors.black,
-                      hintStyle: TextStyle(color: Colors.black)),
-        ),
+            padding: EdgeInsets.all(8.0),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              TextFormField(
+                controller: filtercontroller,
+                onChanged: (value) {
+                  if(value!=''){
+                    String searchquery=value.toLowerCase();
+                    pet.search(searchquery);
+                  }
+                },
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(90),
+                    ),
+                    prefixIcon: Icon(Icons.search),
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                        borderRadius: BorderRadius.circular(90)),
+                    hintText: "Search",
+                    prefixIconColor: Colors.black,
+                    hintStyle: TextStyle(color: Colors.black)),
+              ),
               Text(
                 "Categories",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: size.height * 0.01),
               Container(
-                
-                height: size.height*0.12,
-                
+                height: size.height * 0.12,
                 child: ListView.builder(
-                 
                   itemCount: category.products.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
-                    return ListCategoryWidget( id: category.products[index].id,
-                        name: category.products[index].name,
-                        photo: category.products[index].photo,);
+                    return ListCategoryWidget(
+                      id: category.products[index].id,
+                      name: category.products[index].name,
+                      photo: category.products[index].photo,
+                    );
                   },
                 ),
               ),
               SizedBox(height: size.height * 0.01),
-              Text("All Pets", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              Text("All Pets",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
               SizedBox(height: size.height * 0.02),
-               pet.loadingSpinner
-                    ? Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text('Loading'),
-                          CircularProgressIndicator(
-                            color:Colors.black,
-                          ),
-                          const SizedBox(
-
-                            width: 10,
-                          ),
-                       
-                        ],
-                      )
-                    : pet.products.isEmpty
-                        ? Text('No Pets...')
-                        : SizedBox(
-
+              pet.loadingSpinner
+                  ? Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('Loading'),
+                        CircularProgressIndicator(
+                          color: Colors.black,
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                      ],
+                    )
+                  : pet.products.isEmpty
+                      ? Center(child: Text('No Pets...')):pet.searchproducts.isEmpty&&filtercontroller.text.isNotEmpty?Text('No Pets Availble'):
+                      pet.searchproducts.isNotEmpty&&filtercontroller.text.isNotEmpty?
+                      SizedBox(
                           height: size.height * 0.9,
-                            child: GridView.builder(
-                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,
-                              childAspectRatio: 0.75,
-                              mainAxisSpacing: 15,crossAxisSpacing: 15),
-                              scrollDirection: Axis.vertical,
-                              
-                              
-                              itemCount: pet.products.length,
-                              itemBuilder: (context, intex) {
-                                return PetWidget(
-                                  id: pet.products[intex].petid,
-                                  name: pet.products[intex].name,
-                                  photo: pet.products[intex].photo,
-                                  
+                          child: GridView.builder(
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    childAspectRatio: 0.75,
+                                    mainAxisSpacing: 15,
+                                    crossAxisSpacing: 15),
+                            scrollDirection: Axis.vertical,
+                            itemCount: pet.searchproducts.length,
+                            itemBuilder: (context, intex) {
+                              return PetWidget(
+                                id: pet.searchproducts[intex].petid,
+                                name: pet.searchproducts[intex].name,
+                                photo: pet.searchproducts[intex].photo,
+                                age: pet.searchproducts[intex].age,
+                                sex: pet.searchproducts[intex].sex,
+                              );
+                            },
+                          ),
+                        )
+
+
+
+                      : SizedBox(
+                          height: size.height * 0.9,
+                          child: GridView.builder(
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    childAspectRatio: 0.73,
+                                    mainAxisSpacing: 15,
+                                    crossAxisSpacing: 15),
+                            scrollDirection: Axis.vertical,
+                            itemCount: pet.products.length,
+                            itemBuilder: (context, intex) {
+                              return PetWidget(
+                                id: pet.products[intex].petid,
+                                name: pet.products[intex].name,
+                                photo: pet.products[intex].photo,
+                                 age: pet.products[intex].age,
+                                sex: pet.products[intex].sex,
+
                              
-                             
-                                 
-                                
-                                );
-                              },
-                            ),
-                          ),]
-      )    
-              
-              
-             
-            
-        
-          ),
-      
-        ),
-      );
-    
+                              );
+                            },
+                          ),
+                        ),
+            ])),
+      ),
+    );
   }
 }

@@ -6,8 +6,6 @@ import 'package:petadoption/Screens/favorites/favoriteScreen.dart';
 import 'package:petadoption/Screens/homeScreen/colors.dart';
 import 'package:petadoption/Screens/homeScreen/homeScreen1.dart';
 
-
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -16,17 +14,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     HomeScreen1(),
     Categoryscreen(),
-     FavouriteScreen(),
-      Text("Chats"),
-      ProfileScreen(),
+    FavouriteScreen(),
     
-    
-
-
+    ProfileScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -38,7 +33,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       backgroundColor: pinkish,
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
@@ -57,10 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: Icon(Icons.favorite_border_outlined),
               label: 'Favorites',
             ),
-             BottomNavigationBarItem(
-              icon: Icon(Icons.chat),
-              label: 'Chats',
-            ),
+            
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
               label: 'Profile',

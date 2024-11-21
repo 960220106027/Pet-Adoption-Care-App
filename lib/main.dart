@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home:Splashscreen(),
+        home:HomeScreen(),
         routes: {
           'all_pets_screen':(context)=>HomeScreen1(),
           'all_Categories_screen':(context)=>HomeScreen(),

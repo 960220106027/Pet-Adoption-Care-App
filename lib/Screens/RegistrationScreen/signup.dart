@@ -13,7 +13,6 @@ class SignPage extends StatefulWidget {
 }
 
 class _TextFormState extends State<SignPage> {
-  
   TextEditingController firstnamecontroller = TextEditingController();
   TextEditingController lastnamecontroller = TextEditingController();
   TextEditingController dobcontroller = TextEditingController();
@@ -24,8 +23,15 @@ class _TextFormState extends State<SignPage> {
   TextEditingController gendercontroller = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
-  Future<void> signupAdopter(String firstname,String lastname, String dob, String phone,
-      String email,String password,String address,String gender) async {
+  Future<void> signupAdopter(
+      String firstname,
+      String lastname,
+      String dob,
+      String phone,
+      String email,
+      String password,
+      String address,
+      String gender) async {
     const url =
         'http://campus.sicsglobal.co.in/Project/pet_shop/api/adopter_registration.php';
 
@@ -33,7 +39,7 @@ class _TextFormState extends State<SignPage> {
       'firstname': firstname,
       'lastname': lastname,
       'dob': dob,
-       'phone':phone,
+      'phone': phone,
       'email': email,
       'password': password,
       'address': address,
@@ -157,8 +163,6 @@ class _TextFormState extends State<SignPage> {
                 SizedBox(
                   height: size.height * 0.02,
                 ),
-        
-        
                 TextFormField(
                   validator: (value) {
                     if (dobcontroller.text.isEmpty) {
@@ -225,10 +229,9 @@ class _TextFormState extends State<SignPage> {
                       prefixIconColor: Colors.black,
                       hintStyle: const TextStyle(color: Colors.black)),
                 ),
-                 SizedBox(
+                SizedBox(
                   height: size.height * 0.02,
                 ),
-                
                 TextFormField(
                   validator: (value) {
                     if (passwordcontroller.text.isEmpty) {
@@ -249,7 +252,7 @@ class _TextFormState extends State<SignPage> {
                       prefixIconColor: Colors.black,
                       hintStyle: const TextStyle(color: Colors.black)),
                 ),
-                 SizedBox(
+                SizedBox(
                   height: size.height * 0.02,
                 ),
                 TextFormField(
@@ -272,7 +275,7 @@ class _TextFormState extends State<SignPage> {
                       prefixIconColor: Colors.black,
                       hintStyle: const TextStyle(color: Colors.black)),
                 ),
-                 SizedBox(
+                SizedBox(
                   height: size.height * 0.02,
                 ),
                 TextFormField(
@@ -303,17 +306,16 @@ class _TextFormState extends State<SignPage> {
                         backgroundColor: Color.fromARGB(255, 241, 142, 71),
                         fixedSize: Size(100, 40)),
                     onPressed: () {
-                     signupAdopter(
-                       firstnamecontroller.text.toString(),
-                       lastnamecontroller.text.toString(),
-                       dobcontroller.text.toString(),
+                      signupAdopter(
+                        firstnamecontroller.text.toString(),
+                        lastnamecontroller.text.toString(),
+                        dobcontroller.text.toString(),
                         phonecontroller.text.toString(),
                         emailcontroller.text.toString(),
                         passwordcontroller.text.toString(),
                         addresscontroller.text.toString(),
                         gendercontroller.text.toString(),
-                     );
-                        
+                      );
                     },
                     child: Text(
                       "Sign up",

@@ -15,7 +15,7 @@ class _NopetsscreenState extends State<Nopetsscreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset("assets/nopets.png"),
-          Text("No Pets Found"), 
+          Text("No Pets Found"),
         ],
       ),
     );

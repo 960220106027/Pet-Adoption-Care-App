@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:petadoption/API/favoriteApi.dart';
 import 'package:petadoption/Screens/homeScreen/colors.dart';
+import 'package:provider/provider.dart';
 
 class FavouriteWidget extends StatefulWidget {
 final String favId;
@@ -19,6 +21,7 @@ class _FavouriteWidgetState extends State<FavouriteWidget> {
   @override
   Widget build(BuildContext context) {
    final size = MediaQuery.of(context).size;
+   final fav=Provider.of<FavoriteProvider>(context);
 return Padding(
   padding: const EdgeInsets.all(8.0),
   child: Container(
@@ -54,7 +57,8 @@ return Padding(
                   child: IconButton(
                     style: IconButton.styleFrom(backgroundColor: pinkish),
                     onPressed: () {
-                      
+                      fav.deleteFav(widget.favId, context);
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Pet deleted succesfully')));
                     },
                     icon: Icon(
                       Icons.delete_forever_outlined,

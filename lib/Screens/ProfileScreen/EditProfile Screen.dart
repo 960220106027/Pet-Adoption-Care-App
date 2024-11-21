@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:petadoption/Screens/homeScreen/colors.dart';
 
-
 class EditProfile extends StatefulWidget {
   const EditProfile({super.key});
 
@@ -12,13 +11,12 @@ class EditProfile extends StatefulWidget {
 class _EditProfileState extends State<EditProfile> {
   @override
   Widget build(BuildContext context) {
-     final size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: pinkish,
-     
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.only(top:size.height* 0.1),
+          padding: EdgeInsets.only(top: size.height * 0.1),
           child: Column(
             children: [
               Center(
@@ -40,13 +38,11 @@ class _EditProfileState extends State<EditProfile> {
                 ),
               ),
               Padding(
-                padding:  EdgeInsets.all(20.0),
+                padding: EdgeInsets.all(20.0),
                 child: TextFormField(
                   decoration: InputDecoration(
-                    
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
-                    
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -56,16 +52,13 @@ class _EditProfileState extends State<EditProfile> {
                     labelStyle: TextStyle(color: pink),
                   ),
                 ),
-                
               ),
-               Padding(
-                padding:  EdgeInsets.all(20.0),
+              Padding(
+                padding: EdgeInsets.all(20.0),
                 child: TextFormField(
                   decoration: InputDecoration(
-                    
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
-                    
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -75,16 +68,13 @@ class _EditProfileState extends State<EditProfile> {
                     labelStyle: TextStyle(color: pink),
                   ),
                 ),
-                
               ),
-               Padding(
+              Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: TextFormField(
                   decoration: InputDecoration(
-                    
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
-                    
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -94,16 +84,13 @@ class _EditProfileState extends State<EditProfile> {
                     labelStyle: TextStyle(color: pink),
                   ),
                 ),
-                
               ),
-               Padding(
+              Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: TextFormField(
                   decoration: InputDecoration(
-                    
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
-                    
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -114,16 +101,17 @@ class _EditProfileState extends State<EditProfile> {
                     suffixIcon: Icon(Icons.remove_red_eye),
                   ),
                 ),
-                
               ),
-              SizedBox(height:size.height*0.02,),
+              SizedBox(
+                height: size.height * 0.02,
+              ),
               ElevatedButton(
-                style:ElevatedButton.styleFrom(backgroundColor: pink) ,
-                onPressed: () {
-                
-              }, child: Text("Edit Profile",style: TextStyle(fontSize: 20,color: Colors.black),)),
-              
-              
+                  style: ElevatedButton.styleFrom(backgroundColor: pink),
+                  onPressed: () {},
+                  child: Text(
+                    "Edit Profile",
+                    style: TextStyle(fontSize: 20, color: Colors.black),
+                  )),
             ],
           ),
         ),

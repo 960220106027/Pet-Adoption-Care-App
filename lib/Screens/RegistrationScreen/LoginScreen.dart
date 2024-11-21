@@ -21,8 +21,7 @@ class _LoginPageState extends State<LoginPage> {
     String email,
     String password,
   ) async {
-    const url =
-        'http://campus.sicsglobal.co.in/Project/pet_shop/api/login.php';
+    const url = 'http://campus.sicsglobal.co.in/Project/pet_shop/api/login.php';
 
     Map<String, String> body = {
       'email': email,
@@ -82,7 +81,6 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       backgroundColor: pinkish,
       body: Padding(
-        
         padding: EdgeInsets.all(8.0),
         child: Form(
           key: _formKey,

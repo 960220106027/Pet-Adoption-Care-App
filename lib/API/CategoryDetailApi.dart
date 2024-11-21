@@ -56,7 +56,7 @@ class CategoryDetailProvider with ChangeNotifier {
         for (var i = 0; i < categoriesdetail.length; i++) {
           _products.add(
             CategoryDetail(
-              petid: categoriesdetail[i]['id'].toString(),
+              petid: categoriesdetail[i]['petid'].toString(),
               name: categoriesdetail[i]['name'].toString(),
               species: categoriesdetail[i]['species'].toString(),
               breed: categoriesdetail[i]['breed'].toString(),

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:petadoption/Model/PetModel.dart';
+import 'package:petadoption/Screens/CategoryDetails/CategoryGrid.dart';
+import 'package:petadoption/Screens/PetDetailScreen/Detailscreen.dart';
 import '../Screens/homeScreen/colors.dart';
 
 class CategoryDetailWidget extends StatefulWidget {
@@ -23,34 +26,40 @@ class _CategoryDetailWidgetState extends State<CategoryDetailWidget> {
     final size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Container(
-        
-        color: pink,
-        child: Column(
-          children: [
-           Container(
-                  height: size.height * 0.18,
-                  width: size.width * 0.5,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage(widget.photo),
-                      fit: BoxFit.cover,
+      child: InkWell(
+        onTap: () {
+          Navigator.of(context)
+                .pushNamed(DetailPage.routename ,arguments:widget.petid); 
+        },
+        child: Container(
+          
+          color: pink,
+          child: Column(
+            children: [
+             Container(
+                    height: size.height * 0.18,
+                    width: size.width * 0.5,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(widget.photo),
+                        fit: BoxFit.cover,
+                      ),
+                     
                     ),
-                   
                   ),
-                ),
-            SizedBox(
-              height: size.height * 0.02,
-            ),
-            Text(
-              widget.breed,
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
+              SizedBox(
+                height: size.height * 0.02,
               ),
-            ),
-          ],
+              Text(
+                widget.breed,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
